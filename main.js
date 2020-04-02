@@ -7,7 +7,7 @@ if (window.PaymentRequest) {
     request.canMakePayment()
         .then(function(result) {
             if (result) {
-                // Display PaymentRequest dialog on interaction with the existing checkout button
+
                 document.getElementById('buyButton')
                     .addEventListener('click', onBuyClicked);
             }
@@ -23,7 +23,7 @@ function onBuyClicked() {
     createPaymentRequest()
         .show()
         .then(function(response) {
-            // Dismiss payment dialog.
+
             response.complete('success');
             handlePaymentResponse(response);
         })
@@ -38,8 +38,7 @@ function getGooglePaymentsConfiguration() {
         apiVersion: 2,
         apiVersionMinor: 0,
         merchantInfo: {
-            // A merchant ID is available after approval by Google.
-            // 'merchantId':'0123456789',
+
             merchantName: 'Example Merchant'
         },
         allowedPaymentMethods: [{
@@ -50,8 +49,7 @@ function getGooglePaymentsConfiguration() {
             },
             tokenizationSpecification: {
                 type: 'PAYMENT_GATEWAY',
-                // Check with your payment gateway on the parameters to pass.
-                // @see {@link https://developers.google.com/pay/api/web/reference/request-objects#gateway}
+
                 parameters: {
                     'gateway': 'example',
                     'gatewayMerchantId': 'exampleGatewayMerchantId'
@@ -63,12 +61,12 @@ function getGooglePaymentsConfiguration() {
 
 
 function createPaymentRequest() {
-    // Add support for the Google Pay API.
+
     const methodData = [{
         supportedMethods: 'https://google.com/pay',
         data: getGooglePaymentsConfiguration()
     }];
-    // Add other supported payment methods.
+
     methodData.push({
         supportedMethods: 'basic-card',
         data: {
